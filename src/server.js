@@ -7,12 +7,15 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+// Verifica se a API está respondendo
 app.get('/health', (_req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
+// Rotas principais da API de pedidos
 app.use('/', orderRoutes);
 
+// Inicializa o banco e, ao concluir, inicia o servidor
 initDb()
   .then(() => {
     app.listen(PORT, () => {

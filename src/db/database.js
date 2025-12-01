@@ -12,11 +12,13 @@ if (!fs.existsSync(dataDir)) {
 const dbPath = path.resolve(dataDir, 'database.sqlite');
 export const db = new sqlite3.Database(dbPath);
 
+// Inicializa o banco SQLite, habilita FKs e cria tabelas
 export function initDb() {
   return new Promise((resolve, reject) => {
     db.serialize(() => {
       db.run('PRAGMA foreign_keys = ON');
 
+      // Tabela principal de pedidos
       db.run(
         `CREATE TABLE IF NOT EXISTS "Order" (
           orderId TEXT PRIMARY KEY,
@@ -28,6 +30,7 @@ export function initDb() {
         }
       );
 
+      // Tabela de itens associados ao pedido
       db.run(
         `CREATE TABLE IF NOT EXISTS Items (
           orderId TEXT NOT NULL,

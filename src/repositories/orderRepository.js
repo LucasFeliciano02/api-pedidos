@@ -1,5 +1,6 @@
 import { db } from '../db/database.js';
 
+// Cria um novo pedido e seus itens em transação
 export function createOrder(order) {
   const { orderId, value, creationDate, items } = order;
   return new Promise((resolve, reject) => {
@@ -44,6 +45,7 @@ export function createOrder(order) {
   });
 }
 
+// Busca um pedido pelo ID e agrega seus itens
 export function getOrderById(orderId) {
   return new Promise((resolve, reject) => {
     db.get('SELECT orderId, value, creationDate FROM "Order" WHERE orderId = ?', [orderId], (err, orderRow) => {
@@ -58,6 +60,7 @@ export function getOrderById(orderId) {
   });
 }
 
+// Lista todos os pedidos com seus itens
 export function listOrders() {
   return new Promise((resolve, reject) => {
     db.all('SELECT orderId, value, creationDate FROM "Order"', [], (err, orders) => {
@@ -81,6 +84,7 @@ export function listOrders() {
   });
 }
 
+// Atualiza os dados do pedido e substitui seus itens
 export function updateOrder(orderId, order) {
   const { value, creationDate, items } = order;
   return new Promise((resolve, reject) => {
@@ -126,6 +130,7 @@ export function updateOrder(orderId, order) {
   });
 }
 
+// Exclui um pedido pelo ID 
 export function deleteOrder(orderId) {
   return new Promise((resolve, reject) => {
     db.run('DELETE FROM "Order" WHERE orderId = ?', [orderId], function (err) {

@@ -3,6 +3,7 @@ import { createOrder, getOrderById, listOrders, updateOrder, deleteOrder } from 
 
 const router = express.Router();
 
+// Valida o JSON de entrada e mapeia para o schema interno
 function validateAndMap(body) {
   const errors = [];
   const numeroPedido = body?.numeroPedido;
@@ -48,6 +49,7 @@ function validateAndMap(body) {
   };
 }
 
+// Cria um novo pedido
 router.post('/order', async (req, res) => {
   try {
     const order = validateAndMap(req.body);
@@ -65,6 +67,7 @@ router.post('/order', async (req, res) => {
   }
 });
 
+// Obtém um pedido por ID
 router.get('/order/:orderId', async (req, res) => {
   try {
     const order = await getOrderById(req.params.orderId);
@@ -76,6 +79,7 @@ router.get('/order/:orderId', async (req, res) => {
   }
 });
 
+// Lista todos os pedidos
 router.get('/order/list', async (_req, res) => {
   try {
     const orders = await listOrders();
@@ -86,6 +90,7 @@ router.get('/order/list', async (_req, res) => {
   }
 });
 
+// Atualiza um pedido existente
 router.put('/order/:orderId', async (req, res) => {
   try {
     const mapped = validateAndMap({ ...req.body, numeroPedido: req.params.orderId });
@@ -102,6 +107,7 @@ router.put('/order/:orderId', async (req, res) => {
   }
 });
 
+// Remove um pedido por ID
 router.delete('/order/:orderId', async (req, res) => {
   try {
     const deleted = await deleteOrder(req.params.orderId);
