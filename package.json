@@ -1,0 +1,26 @@
+{
+  "name": "api-pedidos",
+  "version": "0.1.0",
+  "description": "API simples para gerenciar pedidos (Node.js + Express + SQLite)",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "orders",
+    "api",
+    "express",
+    "sqlite3"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
